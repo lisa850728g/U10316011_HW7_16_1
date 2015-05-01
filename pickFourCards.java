@@ -139,6 +139,18 @@ public class pickFourCards extends JFrame{
 		add(panel1,BorderLayout.SOUTH);
 		panel1.add(jbtRefresh, BorderLayout.SOUTH);
 	
+		jbtRefresh.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Collections.shuffle(list);
+				card1.setIcon(list.get(1));
+				card2.setIcon(list.get(2));
+				card3.setIcon(list.get(3));
+				card4.setIcon(list.get(4));
+		
+				panel.repaint();
+			}
+		}
+		);
 	}
 	
 	public static void main(String[] args){
