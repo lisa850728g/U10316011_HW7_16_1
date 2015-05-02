@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class pickFourCards extends JFrame{
 	private JButton jbtRefresh = new JButton("Refresh");
@@ -35,16 +34,23 @@ public class pickFourCards extends JFrame{
 	
 	public pickFourCards(){
 
-		int first = (int)(Math.random() * 52);
-		int second = (int)(Math.random() * 52);
-		int third = (int)(Math.random() * 52);
-		int forth = (int)(Math.random() * 52);
+		int[] deck = new int[52];
 		
-		card1 = new JLabel(image[first]);
-		card2 = new JLabel(image[second]);
-		card3 = new JLabel(image[third]);
-		card4 = new JLabel(image[forth]);
-	
+		for(int i = 0 ; i < deck.length ; i++)
+			deck[i] = i;
+			
+		for(int i = 0 ; i < deck.length ; i ++){
+			int random = (int)(Math.random() * deck.length);
+			int tempt = deck[i];
+			deck[i] = deck[random];
+			deck[random] = tempt;
+		}
+		
+		card1 = new JLabel(image[deck[0]]);
+		card2 = new JLabel(image[deck[1]]);
+		card3 = new JLabel(image[deck[2]]);
+		card4 = new JLabel(image[deck[3]]);
+		
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(1,4,1,1));
 		panel.add(card1);
@@ -57,15 +63,18 @@ public class pickFourCards extends JFrame{
 	
 		jbtRefresh.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				int first1 = (int)(Math.random() * 52);
-				int second1 = (int)(Math.random() * 52);
-				int third1 = (int)(Math.random() * 52);
-				int forth1 = (int)(Math.random() * 52);
+			
+				for(int i = 0 ; i < deck.length ; i ++){
+					int random = (int)(Math.random() * deck.length);
+					int tempt = deck[i];
+					deck[i] = deck[random];
+					deck[random] = tempt;
+				}
 		
-				card1.setIcon(image[first1]);
-				card2.setIcon(image[second1]);
-				card3.setIcon(image[third1]);
-				card4.setIcon(image[forth1]);
+				card1.setIcon(image[deck[0]]);
+				card2.setIcon(image[deck[1]]);
+				card3.setIcon(image[deck[2]]);
+				card4.setIcon(image[deck[3]]);
 		
 				panel.repaint();
 			}
